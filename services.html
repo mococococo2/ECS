@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — EcoClear Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;0,900;1,300;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0D1B0F; --forest: #0E3B22; --green: #1A6B3C;
+    --lime: #C8F542; --lime-dark: #A8D830;
+    --cream: #F5F2EA; --white: #FAFAF8;
+    --muted: #4A6655; --border: rgba(14,59,34,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--ink); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--forest); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 64px; border-bottom: 1px solid rgba(200,245,66,0.2); }
+  .nav-logo { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.25rem; color: var(--lime); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-logo span { color: #fff; font-weight: 300; }
+  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.875rem; font-weight: 400; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--lime); }
+  .nav-cta { background: var(--lime); color: var(--forest) !important; padding: 0.5rem 1.25rem; border-radius: 100px; font-weight: 600 !important; }
+  .nav-cta:hover { background: #d8ff5a; }
+
+  /* PAGE HERO */
+  .page-hero {
+    background: var(--forest);
+    padding: 5rem 4rem 6rem;
+    position: relative; overflow: hidden;
+  }
+  .page-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(26,107,60,0.4) 0%, transparent 70%); pointer-events: none; }
+  .breadcrumb { font-size: 0.8rem; color: rgba(200,245,66,0.7); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; position: relative; z-index: 2; }
+  .breadcrumb a { color: rgba(200,245,66,0.5); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--lime); }
+  .page-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 700; line-height: 1.0;
+    letter-spacing: -0.03em; color: #fff;
+    max-width: 900px;
+    position: relative; z-index: 2;
+  }
+  .page-hero h1 em { font-style: italic; color: var(--lime); font-weight: 300; }
+  .page-hero-sub { font-size: 1.1rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 620px; margin-top: 1.5rem; position: relative; z-index: 2; }
+
+  /* CATEGORY TABS */
+  .category-bar {
+    background: var(--cream);
+    padding: 1.5rem 4rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 0.5rem; flex-wrap: wrap;
+    position: sticky; top: 64px; z-index: 50;
+  }
+  .cat-pill {
+    background: transparent; color: var(--muted);
+    padding: 0.5rem 1.25rem; border-radius: 100px;
+    font-size: 0.825rem; font-weight: 500;
+    border: 1px solid var(--border); cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Outfit', sans-serif;
+    text-decoration: none;
+  }
+  .cat-pill:hover, .cat-pill.active { background: var(--forest); color: #fff; border-color: var(--forest); }
+
+  /* SERVICE DETAIL CARDS */
+  .services-list { padding: 5rem 4rem; background: var(--white); }
+  .svc-detail {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .svc-detail:last-child { border-bottom: none; }
+  .svc-visual {
+    background: var(--cream);
+    border-radius: 24px;
+    padding: 3rem;
+    min-height: 400px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .svc-visual.featured { background: var(--forest); color: #fff; }
+  .svc-visual:hover { transform: translateY(-4px); }
+  .svc-emoji { font-size: 5rem; line-height: 1; }
+  .svc-visual.featured::before {
+    content: ''; position: absolute; top: -30%; right: -20%;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,245,66,0.12) 0%, transparent 70%);
+  }
+  .svc-badge-top {
+    align-self: flex-start;
+    background: rgba(26,107,60,0.1); color: var(--green);
+    border-radius: 100px; padding: 0.35rem 0.9rem;
+    font-size: 0.7rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .svc-visual.featured .svc-badge-top { background: rgba(200,245,66,0.15); color: var(--lime); }
+  .svc-stats { display: flex; gap: 2rem; margin-top: auto; }
+  .svc-stat-num { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700; line-height: 1; color: var(--forest); }
+  .svc-visual.featured .svc-stat-num { color: var(--lime); }
+  .svc-stat-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.3rem; font-weight: 500; }
+  .svc-visual.featured .svc-stat-label { color: rgba(255,255,255,0.5); }
+
+  .svc-content {}
+  .svc-number {
+    font-family: 'Fraunces', serif;
+    font-size: 0.85rem; font-weight: 500;
+    color: var(--lime-dark);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+  .svc-content h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--forest); margin-bottom: 1rem;
+  }
+  .svc-content h2 em { font-style: italic; color: var(--green); font-weight: 300; }
+  .svc-content > p { font-size: 1rem; color: var(--muted); font-weight: 300; line-height: 1.75; margin-bottom: 1.5rem; }
+  .svc-features { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem 1.25rem; margin: 1.5rem 0; }
+  .svc-feature { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.875rem; color: var(--ink); font-weight: 400; line-height: 1.5; }
+  .feat-check {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--lime); color: var(--forest);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+    font-size: 10px; font-weight: 700;
+  }
+  .svc-cta-row { display: flex; gap: 0.75rem; margin-top: 2rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--lime); color: var(--forest); padding: 0.75rem 1.75rem; border-radius: 100px; font-weight: 600; font-size: 0.875rem; text-decoration: none; border: none; cursor: pointer; transition: all 0.15s; display: inline-block; font-family: 'Outfit', sans-serif; }
+  .btn-primary:hover { background: #d8ff5a; transform: translateY(-1px); }
+  .btn-outline { color: var(--forest); padding: 0.75rem 1.5rem; border-radius: 100px; font-weight: 500; font-size: 0.875rem; text-decoration: none; border: 1px solid var(--border); transition: all 0.2s; display: inline-block; }
+  .btn-outline:hover { border-color: var(--forest); background: var(--cream); }
+
+  .coming-soon-row {
+    background: var(--cream); padding: 4rem; margin: 3rem 0;
+    border-radius: 24px; text-align: center;
+  }
+  .coming-soon-row h3 {
+    font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600;
+    color: var(--forest); margin-bottom: 0.5rem;
+  }
+  .coming-soon-row > p { font-size: 0.95rem; color: var(--muted); font-weight: 300; max-width: 480px; margin: 0 auto 2rem; }
+  .coming-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 720px; margin: 0 auto; }
+  .coming-card { background: var(--white); border-radius: 16px; padding: 2rem 1.5rem; border: 1px dashed var(--border); }
+  .coming-card .c-emoji { font-size: 2rem; margin-bottom: 0.5rem; }
+  .coming-card h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; color: var(--forest); margin-bottom: 0.3rem; }
+  .coming-card p { font-size: 0.825rem; color: var(--muted); font-weight: 300; margin-bottom: 0.75rem; }
+  .coming-badge { display: inline-block; background: rgba(200,245,66,0.3); color: var(--forest); font-size: 0.7rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* CTA BANNER */
+  .cta-banner {
+    background: var(--forest);
+    padding: 5rem 4rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-banner::before { content: ''; position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(200,245,66,0.08) 0%, transparent 65%); }
+  .cta-banner > * { position: relative; z-index: 1; }
+  .cta-banner h2 { font-family: 'Fraunces', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; color: #fff; max-width: 720px; margin: 0 auto 1rem; }
+  .cta-banner h2 em { font-style: italic; color: var(--lime); font-weight: 300; }
+  .cta-banner p { font-size: 1rem; color: rgba(255,255,255,0.6); font-weight: 300; max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.7; }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-ghost { color: rgba(255,255,255,0.8); padding: 0.75rem 1.5rem; border-radius: 100px; font-weight: 400; font-size: 0.875rem; text-decoration: none; border: 1px solid rgba(255,255,255,0.2); transition: all 0.2s; display: inline-block; }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+  /* FOOTER */
+  footer { background: var(--ink); padding: 4rem 4rem 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-logo { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700; color: var(--lime); margin-bottom: 0.75rem; display: block; text-decoration: none; }
+  .footer-logo span { color: rgba(255,255,255,0.5); font-weight: 300; }
+  .footer-desc { font-size: 0.825rem; color: rgba(255,255,255,0.4); font-weight: 300; line-height: 1.7; margin-bottom: 1.25rem; }
+  .footer-contact { display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.8rem; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .footer-contact a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-contact a:hover { color: var(--lime); }
+  .footer-col h4 { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.3); margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul a { font-size: 0.825rem; color: rgba(255,255,255,0.5); text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--lime); }
+  .footer-bar { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; color: rgba(255,255,255,0.25); font-weight: 300; }
+  .footer-bar a { color: rgba(255,255,255,0.25); text-decoration: none; margin-left: 1.5rem; }
+  .footer-bar a:hover { color: rgba(255,255,255,0.5); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+
+  @media (max-width: 900px) {
+    .svc-detail { grid-template-columns: 1fr; }
+    .nav-links { gap: 1rem; font-size: 0.8rem; }
+    .page-hero, .services-list, .cta-banner, .category-bar, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">EcoClear <span>Solutions</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="property-managers.html">Property Managers</a></li>
+    <li><a href="residents.html">Residents</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="tel:2149091824" class="nav-cta">📞 (214)-909-1824</a></li>
+  </ul>
+</nav>
+
+<section class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;›&nbsp; Services</div>
+  <h1>Everything your<br><em>property needs</em></h1>
+  <p class="page-hero-sub">From nightly doorstep collection to full-scale property maintenance — EcoClear is the complete property services partner for DFW's multifamily communities.</p>
+</section>
+
+<div class="category-bar">
+  <a href="#valet-trash" class="cat-pill active">Valet Trash</a>
+  <a href="#pressure-washing" class="cat-pill">Pressure Washing</a>
+  <a href="#janitorial" class="cat-pill">Janitorial</a>
+  <a href="#dog-park" class="cat-pill">Dog Park</a>
+  <a href="#carpet" class="cat-pill">Carpet Cleaning</a>
+  <a href="#make-ready" class="cat-pill">Make-Ready</a>
+  <a href="#junk" class="cat-pill">Junk Removal</a>
+  <a href="#post-construction" class="cat-pill">Post-Construction</a>
+  <a href="#coming-soon" class="cat-pill">Coming Soon</a>
+</div>
+
+<section class="services-list">
+
+  <!-- VALET TRASH -->
+  <div class="svc-detail" id="valet-trash">
+    <div class="svc-visual featured reveal">
+      <div>
+        <span class="svc-badge-top">Core Service</span>
+        <div class="svc-emoji" style="margin-top:1.5rem;">🗑️</div>
+      </div>
+      <div class="svc-stats">
+        <div>
+          <div class="svc-stat-num">20K+</div>
+          <div class="svc-stat-label">Residents Served</div>
+        </div>
+        <div>
+          <div class="svc-stat-num">100%</div>
+          <div class="svc-stat-label">GPS Verified</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-content reveal reveal-delay-1">
+      <div class="svc-number">01 / Valet Trash Service</div>
+      <h2>Nightly <em>doorstep</em> trash &amp; recycling</h2>
+      <p>The cornerstone of a cleaner community. Our uniformed crews collect bagged trash and recyclables directly from each resident's doorstep every evening, 5 nights a week — with real-time GPS verification and photo proof on every pickup.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><div class="feat-check">✓</div>Nightly pickup 6–8 PM</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Leak-proof bins included</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Photo proof of service</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>GPS-stamped routes</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Recycling sorting</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Resident welcome kit</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Compliance reporting</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Violation documentation</div>
+      </div>
+      <div class="svc-cta-row">
+        <a href="contact.html" class="btn-primary">Get a Quote →</a>
+        <a href="property-managers.html" class="btn-outline">For Property Managers</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRESSURE WASHING -->
+  <div class="svc-detail" id="pressure-washing">
+    <div class="svc-visual reveal">
+      <div>
+        <span class="svc-badge-top">Popular</span>
+        <div class="svc-emoji" style="margin-top:1.5rem;">🚿</div>
+      </div>
+      <div class="svc-stats">
+        <div>
+          <div class="svc-stat-num">4,000<span style="font-size:0.9rem;">psi</span></div>
+          <div class="svc-stat-label">Industrial Grade</div>
+        </div>
+        <div>
+          <div class="svc-stat-num">Eco</div>
+          <div class="svc-stat-label">Biodegradable Soap</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-content reveal reveal-delay-1">
+      <div class="svc-number">02 / Pressure Washing</div>
+      <h2>Restored curb appeal, <em>inside and out</em></h2>
+      <p>Sidewalks, parking lots, breezeways, and dumpster pads — we bring surfaces back to pristine condition using industrial-grade equipment and eco-friendly cleaning agents that are safe for residents, pets, and landscaping.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><div class="feat-check">✓</div>Sidewalks &amp; walkways</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Parking lots &amp; garages</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Breezeways &amp; corridors</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Dumpster pad cleaning</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Building exteriors</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Pool decks &amp; patios</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Gum &amp; stain removal</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Hot water steam option</div>
+      </div>
+      <div class="svc-cta-row">
+        <a href="contact.html" class="btn-primary">Get a Quote →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JANITORIAL -->
+  <div class="svc-detail" id="janitorial">
+    <div class="svc-visual reveal">
+      <div>
+        <span class="svc-badge-top">Commercial</span>
+        <div class="svc-emoji" style="margin-top:1.5rem;">🧹</div>
+      </div>
+      <div class="svc-stats">
+        <div>
+          <div class="svc-stat-num">24/7</div>
+          <div class="svc-stat-label">Flexible Scheduling</div>
+        </div>
+        <div>
+          <div class="svc-stat-num">W-2</div>
+          <div class="svc-stat-label">Vetted Staff</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-content reveal reveal-delay-1">
+      <div class="svc-number">03 / Commercial Janitorial</div>
+      <h2>Professional <em>cleaning crews</em>, on your schedule</h2>
+      <p>Common areas, lobbies, leasing offices, fitness centers, and clubhouses — kept immaculate by vetted, uniformed professionals. Choose daily, weekly, or custom service frequency with real-time task tracking.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><div class="feat-check">✓</div>Leasing office cleaning</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Clubhouse &amp; amenity areas</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Fitness center sanitation</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Lobby &amp; hallway cleaning</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Restroom sanitation</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Trash &amp; restock service</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Floor care &amp; polishing</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Window &amp; glass cleaning</div>
+      </div>
+      <div class="svc-cta-row">
+        <a href="contact.html" class="btn-primary">Get a Quote →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOG PARK -->
+  <div class="svc-detail" id="dog-park">
+    <div class="svc-visual reveal">
+      <div>
+        <span class="svc-badge-top">Pet-Safe</span>
+        <div class="svc-emoji" style="margin-top:1.5rem;">🐾</div>
+      </div>
+      <div class="svc-stats">
+        <div>
+          <div class="svc-stat-num">3×</div>
+          <div class="svc-stat-label">Weekly Service</div>
+        </div>
+        <div>
+          <div class="svc-stat-num">EPA</div>
+          <div class="svc-stat-label">Approved Products</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-content reveal reveal-delay-1">
+      <div class="svc-number">04 / Dog Park Sanitation</div>
+      <h2>Pet amenities, <em>always resident-ready</em></h2>
+      <p>Your dog park is one of the most-used amenities — and the easiest to neglect. We handle waste removal, surface sanitation, deodorizing, and bag station restocking so your pet areas stay clean, safe, and odor-free.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><div class="feat-check">✓</div>Pet waste removal</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Surface deodorizing</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Bag station restocking</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Turf sanitation</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>EPA-approved cleaners</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Equipment inspection</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Weekly reports</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Pet-safe formulas</div>
+      </div>
+      <div class="svc-cta-row">
+        <a href="contact.html" class="btn-primary">Get a Quote →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARPET -->
+  <div class="svc-detail" id="carpet">
+    <div class="svc-visual reveal">
+      <div>
+        <span class="svc-badge-top">Deep Clean</span>
+        <div class="svc-emoji" style="margin-top:1.5rem;">🧺</div>
+      </div>
+      <div class="svc-stats">
+        <div>
+          <div class="svc-stat-num">Truck</div>
+          <div class="svc-stat-label">Mount System</div>
+        </div>
+        <div>
+          <div class="svc-stat-num">2hr</div>
+          <div class="svc-stat-label">Dry Time</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-content reveal reveal-delay-1">
+      <div class="svc-number">05 / Commercial Carpet Cleaning</div>
+      <h2>Deep cleaning that <em>extends carpet life</em></h2>
+      <p>High-traffic hallways, unit interiors, and common areas get deep-cleaned with truck-mounted hot water extraction. Removes stains, allergens, and odors — and extends flooring life by years.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><div class="feat-check">✓</div>Hot water extraction</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Stain &amp; pet odor removal</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Unit turnover cleaning</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Hallway &amp; corridor service</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Deodorizing treatment</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Upholstery cleaning</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Allergen reduction</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Fast 2-hour dry time</div>
+      </div>
+      <div class="svc-cta-row">
+        <a href="contact.html" class="btn-primary">Get a Quote →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAKE READY -->
+  <div class="svc-detail" id="make-ready">
+    <div class="svc-visual reveal">
+      <div>
+        <span class="svc-badge-top">Fast Turnover</span>
+        <div class="svc-emoji" style="margin-top:1.5rem;">🔑</div>
+      </div>
+      <div class="svc-stats">
+        <div>
+          <div class="svc-stat-num">24hr</div>
+          <div class="svc-stat-label">Turn Time</div>
+        </div>
+        <div>
+          <div class="svc-stat-num">80+</div>
+          <div class="svc-stat-label">Checklist Items</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-content reveal reveal-delay-1">
+      <div class="svc-number">06 / Apartment Cleanouts &amp; Make-Ready</div>
+      <h2>Ready for the <em>next resident</em> — fast</h2>
+      <p>When a unit turns, every day of vacancy is lost revenue. Our make-ready team handles complete cleanouts, deep cleaning, and detailed inspections so units are move-in ready in 24 hours or less.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><div class="feat-check">✓</div>Complete unit cleanouts</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Deep interior cleaning</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Appliance detailing</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Bathroom sanitation</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Window &amp; blind cleaning</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Trash &amp; debris haul-out</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Final walkthrough photos</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>80+ point checklist</div>
+      </div>
+      <div class="svc-cta-row">
+        <a href="contact.html" class="btn-primary">Get a Quote →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JUNK REMOVAL -->
+  <div class="svc-detail" id="junk">
+    <div class="svc-visual reveal">
+      <div>
+        <span class="svc-badge-top">Same-Day</span>
+        <div class="svc-emoji" style="margin-top:1.5rem;">📦</div>
+      </div>
+      <div class="svc-stats">
+        <div>
+          <div class="svc-stat-num">Same</div>
+          <div class="svc-stat-label">Day Service</div>
+        </div>
+        <div>
+          <div class="svc-stat-num">80%</div>
+          <div class="svc-stat-label">Diverted From Landfill</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-content reveal reveal-delay-1">
+      <div class="svc-number">07 / Junk Removal</div>
+      <h2>Bulk items, <em>gone today</em></h2>
+      <p>Abandoned mattresses, broken furniture, move-out piles — we haul it all away with same-day response. Up to 80% of items diverted to donation, recycling, or responsible disposal.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><div class="feat-check">✓</div>Furniture &amp; mattresses</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Appliances &amp; electronics</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Move-out debris</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Bulk items &amp; boxes</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Hot tub &amp; playset removal</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Yard waste &amp; debris</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Donation partnerships</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Same-day response</div>
+      </div>
+      <div class="svc-cta-row">
+        <a href="contact.html" class="btn-primary">Get a Quote →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST CONSTRUCTION -->
+  <div class="svc-detail" id="post-construction">
+    <div class="svc-visual reveal">
+      <div>
+        <span class="svc-badge-top">Contractor Grade</span>
+        <div class="svc-emoji" style="margin-top:1.5rem;">🏗️</div>
+      </div>
+      <div class="svc-stats">
+        <div>
+          <div class="svc-stat-num">3-Phase</div>
+          <div class="svc-stat-label">Clean Process</div>
+        </div>
+        <div>
+          <div class="svc-stat-num">24hr</div>
+          <div class="svc-stat-label">Response Time</div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-content reveal reveal-delay-1">
+      <div class="svc-number">08 / Post-Construction Cleaning</div>
+      <h2>From jobsite to <em>white-glove ready</em></h2>
+      <p>Construction debris, dust, adhesive residue, and grime — removed completely. We serve contractors, developers, and commercial property owners with our proven 3-phase post-construction cleaning process.</p>
+      <div class="svc-features">
+        <div class="svc-feature"><div class="feat-check">✓</div>Debris haul-away</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Dust elimination</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Adhesive &amp; residue removal</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Window &amp; fixture cleaning</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Floor polishing</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>HVAC vent cleaning</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Final punch-list clean</div>
+        <div class="svc-feature"><div class="feat-check">✓</div>Walkthrough inspection</div>
+      </div>
+      <div class="svc-cta-row">
+        <a href="contact.html" class="btn-primary">Get a Quote →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMING SOON -->
+  <div class="coming-soon-row reveal" id="coming-soon">
+    <h3>Expanding our portfolio</h3>
+    <p>Two new services launching soon to further support your community.</p>
+    <div class="coming-grid">
+      <div class="coming-card">
+        <div class="c-emoji">🪠</div>
+        <h4>Trash Chute Sanitation</h4>
+        <p>Deep cleaning, deodorizing, and sanitation of apartment trash chutes.</p>
+        <span class="coming-badge">Launching 2026</span>
+      </div>
+      <div class="coming-card">
+        <div class="c-emoji">🐜</div>
+        <h4>Pest Control</h4>
+        <p>Commercial-grade, eco-friendly pest management for multifamily properties.</p>
+        <span class="coming-badge">Launching 2027</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="cta-banner">
+  <h2>One partner, <em>every service</em></h2>
+  <p>Stop juggling vendors. EcoClear handles your property's entire cleaning and maintenance stack with one point of contact, one invoice, and one team that actually shows up.</p>
+  <div class="cta-actions">
+    <a href="contact.html" class="btn-primary">Request Your Free Quote</a>
+    <a href="tel:2149091824" class="btn-ghost">Call (214)-909-1824</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="index.html" class="footer-logo">EcoClear <span>Solutions LLC</span></a>
+      <p class="footer-desc">Dallas–Fort Worth's #1 rated valet trash and property services company. GPS-verified pickups, real-time reporting, and a team that genuinely cares.</p>
+      <div class="footer-contact">
+        <a href="tel:2149091824">(214)-909-1824</a>
+        <a href="mailto:support@ecoclearsolutions.net">support@ecoclearsolutions.net</a>
+        <span>2310 N Henderson Ave #1232, Dallas TX 75206</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html#valet-trash">Valet Trash</a></li>
+        <li><a href="services.html#pressure-washing">Pressure Washing</a></li>
+        <li><a href="services.html#carpet">Carpet Cleaning</a></li>
+        <li><a href="services.html#dog-park">Dog Park Sanitation</a></li>
+        <li><a href="services.html#junk">Junk Removal</a></li>
+        <li><a href="services.html#post-construction">Post-Construction</a></li>
+        <li><a href="services.html#janitorial">Commercial Janitorial</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="property-managers.html">Property Managers</a></li>
+        <li><a href="residents.html">Residents</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>DFW Locations</h4>
+      <ul>
+        <li><a href="#">Dallas</a></li>
+        <li><a href="#">Fort Worth</a></li>
+        <li><a href="#">Plano</a></li>
+        <li><a href="#">Irving</a></li>
+        <li><a href="#">Frisco</a></li>
+        <li><a href="#">Carrollton</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span>Copyright 2026 © EcoClear Solutions LLC</span>
+    <div><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></div>
+  </div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// Active pill on scroll
+const sections = document.querySelectorAll('.svc-detail, #coming-soon');
+const pills = document.querySelectorAll('.cat-pill');
+window.addEventListener('scroll', () => {
+  let active = 0;
+  sections.forEach((s, i) => { if (s.getBoundingClientRect().top < 200) active = i; });
+  pills.forEach((p, i) => p.classList.toggle('active', i === active));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Residents — EcoClear Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;0,900;1,300;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0D1B0F; --forest: #0E3B22; --green: #1A6B3C;
+    --lime: #C8F542; --lime-dark: #A8D830;
+    --cream: #F5F2EA; --white: #FAFAF8;
+    --muted: #4A6655; --border: rgba(14,59,34,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--ink); overflow-x: hidden; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: var(--forest); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 64px; border-bottom: 1px solid rgba(200,245,66,0.2); }
+  .nav-logo { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.25rem; color: var(--lime); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-logo span { color: #fff; font-weight: 300; }
+  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.875rem; font-weight: 400; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--lime); }
+  .nav-cta { background: var(--lime); color: var(--forest) !important; padding: 0.5rem 1.25rem; border-radius: 100px; font-weight: 600 !important; }
+
+  .section-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+  .section-label::before { content: ''; display: inline-block; width: 20px; height: 2px; background: var(--lime); border-radius: 1px; }
+  .section-title { font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 3.5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; color: var(--forest); margin-bottom: 1rem; }
+  .section-title em { font-style: italic; font-weight: 300; color: var(--green); }
+  .section-sub { font-size: 1rem; font-weight: 300; color: var(--muted); line-height: 1.7; max-width: 620px; margin-bottom: 3rem; }
+  .btn-primary { background: var(--lime); color: var(--forest); padding: 0.85rem 2rem; border-radius: 100px; font-weight: 600; font-size: 0.95rem; text-decoration: none; border: none; cursor: pointer; transition: all 0.15s; display: inline-block; font-family: 'Outfit', sans-serif; }
+  .btn-primary:hover { background: #d8ff5a; transform: translateY(-1px); }
+  .btn-ghost { color: rgba(255,255,255,0.8); padding: 0.85rem 1.5rem; border-radius: 100px; font-weight: 400; font-size: 0.95rem; text-decoration: none; border: 1px solid rgba(255,255,255,0.2); transition: all 0.2s; display: inline-block; }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+  /* HERO */
+  .res-hero {
+    background: var(--forest);
+    padding: 5rem 4rem 6rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .res-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(26,107,60,0.4) 0%, transparent 70%); pointer-events: none; }
+  .res-hero-left { position: relative; z-index: 2; }
+  .breadcrumb { font-size: 0.8rem; color: rgba(200,245,66,0.7); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .breadcrumb a { color: rgba(200,245,66,0.5); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--lime); }
+  .res-hero h1 { font-family: 'Fraunces', serif; font-size: clamp(2.8rem, 5vw, 5rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; color: #fff; margin-bottom: 1.5rem; }
+  .res-hero h1 em { font-style: italic; color: var(--lime); font-weight: 300; }
+  .res-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.65); font-weight: 300; line-height: 1.7; margin-bottom: 2.5rem; max-width: 520px; }
+
+  /* Visual illustration card */
+  .res-hero-right { position: relative; z-index: 2; display: flex; justify-content: center; }
+  .clock-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 28px; padding: 3rem;
+    width: 100%; max-width: 420px; text-align: center;
+  }
+  .clock-label { font-size: 0.75rem; font-weight: 600; color: rgba(200,245,66,0.7); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1rem; }
+  .clock-time { font-family: 'Fraunces', serif; font-size: 4.5rem; font-weight: 700; color: var(--lime); line-height: 1; margin-bottom: 0.5rem; }
+  .clock-sub { font-size: 1rem; color: rgba(255,255,255,0.6); font-weight: 300; margin-bottom: 2rem; }
+  .clock-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 1.5rem 0; }
+  .clock-days { display: flex; justify-content: space-between; gap: 0.4rem; }
+  .day-pill {
+    flex: 1;
+    padding: 0.6rem 0.3rem;
+    background: rgba(200,245,66,0.15);
+    border: 1px solid rgba(200,245,66,0.3);
+    border-radius: 10px;
+    font-size: 0.7rem; color: var(--lime); font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .day-pill.off { background: transparent; border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,0.3); }
+  .clock-note { margin-top: 1.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.4); font-weight: 300; }
+
+  /* HOW IT WORKS */
+  .how-res { padding: 6rem 4rem; background: var(--cream); }
+  .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .how-card {
+    background: var(--white); border-radius: 20px;
+    padding: 2rem; border: 1px solid var(--border);
+    position: relative;
+  }
+  .how-num {
+    position: absolute; top: -1rem; left: 1.75rem;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--forest); color: var(--lime);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-weight: 700; font-size: 1rem;
+  }
+  .how-icon { font-size: 2.5rem; margin-bottom: 1rem; margin-top: 0.5rem; }
+  .how-card h3 { font-family: 'Fraunces', serif; font-size: 1.25rem; font-weight: 500; color: var(--forest); margin-bottom: 0.6rem; }
+  .how-card p { font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.65; }
+
+  /* RULES - DO / DON'T */
+  .rules { padding: 6rem 4rem; background: var(--white); }
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .rule-col {
+    border-radius: 24px; padding: 2.5rem;
+  }
+  .rule-col.do { background: rgba(200,245,66,0.12); border: 1px solid rgba(200,245,66,0.3); }
+  .rule-col.dont { background: rgba(176,48,48,0.05); border: 1px solid rgba(176,48,48,0.15); }
+  .rule-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+  .rule-icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1.1rem;
+  }
+  .rule-col.do .rule-icon { background: var(--lime); color: var(--forest); }
+  .rule-col.dont .rule-icon { background: #b03030; color: #fff; }
+  .rule-col h3 { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; color: var(--forest); }
+  .rule-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .rule-item { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.925rem; color: var(--ink); line-height: 1.5; font-weight: 400; }
+  .rule-item strong { display: block; font-weight: 500; margin-bottom: 0.1rem; font-family: 'Fraunces', serif; font-size: 1rem; }
+  .rule-item span { font-size: 0.825rem; color: var(--muted); font-weight: 300; }
+  .rule-dot {
+    flex-shrink: 0; margin-top: 4px;
+    width: 16px; height: 16px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700;
+  }
+  .rule-col.do .rule-dot { background: var(--lime); color: var(--forest); }
+  .rule-col.dont .rule-dot { background: rgba(176,48,48,0.2); color: #b03030; }
+
+  /* FAQ */
+  .faq { padding: 6rem 4rem; background: var(--cream); }
+  .faq-list { display: flex; flex-direction: column; gap: 0.75rem; max-width: 820px; margin: 0 auto; }
+  .faq-item {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.5rem 1.75rem;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .faq-item:hover { border-color: var(--green); }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 500;
+    color: var(--forest);
+  }
+  .faq-toggle { color: var(--lime-dark); font-size: 1.5rem; font-weight: 300; transition: transform 0.2s; line-height: 1; }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s, padding 0.3s;
+    font-size: 0.925rem; color: var(--muted); font-weight: 300; line-height: 1.7;
+  }
+  .faq-item.open .faq-a { max-height: 300px; padding-top: 1rem; }
+
+  /* SUPPORT */
+  .support-cta { padding: 6rem 4rem; background: var(--white); text-align: center; }
+  .support-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .support-card { background: var(--cream); border-radius: 20px; padding: 2rem; text-align: center; transition: all 0.2s; }
+  .support-card:hover { transform: translateY(-3px); background: var(--forest); color: #fff; }
+  .support-card:hover h3, .support-card:hover p { color: #fff; }
+  .support-card:hover .sc-icon { background: var(--lime); }
+  .sc-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--lime); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 1rem; transition: background 0.2s; }
+  .support-card h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 500; color: var(--forest); margin-bottom: 0.4rem; transition: color 0.2s; }
+  .support-card p { font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.6; transition: color 0.2s; }
+  .support-card a { color: var(--green); text-decoration: none; font-weight: 500; display: block; margin-top: 0.5rem; }
+  .support-card:hover a { color: var(--lime); }
+
+  /* FOOTER */
+  footer { background: var(--ink); padding: 4rem 4rem 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-logo { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700; color: var(--lime); margin-bottom: 0.75rem; display: block; text-decoration: none; }
+  .footer-logo span { color: rgba(255,255,255,0.5); font-weight: 300; }
+  .footer-desc { font-size: 0.825rem; color: rgba(255,255,255,0.4); font-weight: 300; line-height: 1.7; margin-bottom: 1.25rem; }
+  .footer-contact { display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.8rem; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .footer-contact a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-contact a:hover { color: var(--lime); }
+  .footer-col h4 { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.3); margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul a { font-size: 0.825rem; color: rgba(255,255,255,0.5); text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--lime); }
+  .footer-bar { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; color: rgba(255,255,255,0.25); font-weight: 300; }
+  .footer-bar a { color: rgba(255,255,255,0.25); text-decoration: none; margin-left: 1.5rem; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+
+  @media (max-width: 900px) {
+    .res-hero, .rules-grid { grid-template-columns: 1fr; }
+    .how-grid, .support-cards { grid-template-columns: 1fr; }
+    .nav-links { gap: 1rem; font-size: 0.8rem; }
+    .res-hero, .how-res, .rules, .faq, .support-cta, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">EcoClear <span>Solutions</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="property-managers.html">Property Managers</a></li>
+    <li><a href="residents.html" class="active">Residents</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="tel:2149091824" class="nav-cta">📞 (214)-909-1824</a></li>
+  </ul>
+</nav>
+
+<section class="res-hero">
+  <div class="res-hero-left">
+    <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;›&nbsp; Residents</div>
+    <h1>Your trash,<br><em>handled</em></h1>
+    <p>Never drag a heavy bag to the dumpster again. Just set it outside your door between 6–8 PM — we'll handle the rest. Quiet, quick, and invisible to your evening.</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+      <a href="#how-it-works" class="btn-primary">See How It Works</a>
+      <a href="#faq" class="btn-ghost">Read the FAQ</a>
+    </div>
+  </div>
+  <div class="res-hero-right">
+    <div class="clock-card">
+      <div class="clock-label">Pickup Window</div>
+      <div class="clock-time">6–8<span style="font-size:2rem;">PM</span></div>
+      <div class="clock-sub">Every Sunday–Thursday</div>
+      <div class="clock-divider"></div>
+      <div class="clock-days">
+        <div class="day-pill">SUN</div>
+        <div class="day-pill">MON</div>
+        <div class="day-pill">TUE</div>
+        <div class="day-pill">WED</div>
+        <div class="day-pill">THU</div>
+        <div class="day-pill off">FRI</div>
+        <div class="day-pill off">SAT</div>
+      </div>
+      <div class="clock-note">Service hours may vary by property — check your welcome kit.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-res" id="how-it-works">
+  <div class="section-label reveal">The Routine</div>
+  <h2 class="section-title reveal reveal-delay-1">Three steps. <em>That's it.</em></h2>
+  <p class="section-sub reveal reveal-delay-2">We designed this to be the easiest amenity in your building. No apps to download, no schedules to remember — just a simple nightly habit.</p>
+
+  <div class="how-grid">
+    <div class="how-card reveal">
+      <div class="how-num">1</div>
+      <div class="how-icon">🛍️</div>
+      <h3>Bag &amp; tie</h3>
+      <p>Place your trash in tied bags — doubled up if leaky or heavy. Max 20 lbs per bag. Recyclables go in the same bin, clearly marked.</p>
+    </div>
+    <div class="how-card reveal reveal-delay-1">
+      <div class="how-num">2</div>
+      <div class="how-icon">🚪</div>
+      <h3>Set out by 8 PM</h3>
+      <p>Place your EcoClear bin just outside your door between 6–8 PM, Sunday through Thursday. Keep walkways clear for neighbors.</p>
+    </div>
+    <div class="how-card reveal reveal-delay-2">
+      <div class="how-num">3</div>
+      <div class="how-icon">✨</div>
+      <h3>We handle the rest</h3>
+      <p>Our team arrives quietly each evening, collects everything, and takes it to the dumpster. Your empty bin stays by your door until morning.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section class="rules">
+  <div class="section-label reveal">The Rules</div>
+  <h2 class="section-title reveal reveal-delay-1">What to <em>set out</em> — and what to skip</h2>
+  <p class="section-sub reveal reveal-delay-2">Keep your neighbors happy and our crew safe by following these simple guidelines.</p>
+
+  <div class="rules-grid">
+    <div class="rule-col do reveal">
+      <div class="rule-header">
+        <div class="rule-icon">✓</div>
+        <h3>Yes, please</h3>
+      </div>
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-dot">✓</div>
+          <div><strong>Tied, bagged household trash</strong><span>Double-bag anything leaky, wet, or heavy (meat scraps, liquids, etc.)</span></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-dot">✓</div>
+          <div><strong>Bagged recyclables</strong><span>Cardboard flattened and placed next to the bin is welcome too.</span></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-dot">✓</div>
+          <div><strong>Small flattened boxes</strong><span>Break down Amazon boxes before setting them out.</span></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-dot">✓</div>
+          <div><strong>Pet waste (sealed &amp; bagged)</strong><span>Must be in sealed plastic bags — double-bag for odor control.</span></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-dot">✓</div>
+          <div><strong>Light yard waste in bags</strong><span>Bagged leaves or small plant clippings are fine in moderation.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="rule-col dont reveal reveal-delay-1">
+      <div class="rule-header">
+        <div class="rule-icon">✕</div>
+        <h3>Please don't</h3>
+      </div>
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="rule-dot">✕</div>
+          <div><strong>Loose trash (no bag)</strong><span>Everything must be in sealed, tied bags — no exceptions.</span></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-dot">✕</div>
+          <div><strong>Furniture or large items</strong><span>Contact your office for bulk pickup — we can't take mattresses, couches, or appliances on the valet route.</span></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-dot">✕</div>
+          <div><strong>Hazardous materials</strong><span>No paint, batteries, propane, motor oil, chemicals, or sharps. Check your city's HHW drop-off.</span></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-dot">✕</div>
+          <div><strong>Loose liquids</strong><span>Pour out liquids first — leaking bags damage floors and create hazards.</span></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-dot">✕</div>
+          <div><strong>Bags over 20 lbs</strong><span>Split heavy trash into two bags. Our team's safety comes first.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-label reveal">FAQ</div>
+  <h2 class="section-title reveal reveal-delay-1">Got <em>questions?</em></h2>
+  <p class="section-sub reveal reveal-delay-2">If you don't see your answer here, reach out to your property office or contact us directly.</p>
+
+  <div class="faq-list">
+    <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+      <div class="faq-q">When does pickup happen? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Pickup occurs between 6–8 PM, Sunday through Thursday, on most properties. Your specific schedule is included in your welcome kit and may vary slightly based on your community.</div>
+    </div>
+    <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What if I forget to set my trash out? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">No problem — just wait for the next pickup night. If you have an overflow, you can always take it to the community dumpster directly. Please don't leave trash out after 8 PM.</div>
+    </div>
+    <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What if my bag is missed? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Contact your property office or email us at support@ecoclearsolutions.net. We investigate every missed pickup with GPS logs and photo records — and make it right the next night.</div>
+    </div>
+    <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Can I recycle? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Yes! Bag your recyclables separately and mark the bag. We follow local recycling guidelines and our crew will sort accordingly. Flattened cardboard can be placed next to the bin.</div>
+    </div>
+    <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+      <div class="faq-q">How do I get a replacement bin? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">Contact your property management office. We'll provide a replacement bin at no cost if yours is damaged or missing. Please keep bins inside your unit during the day.</div>
+    </div>
+    <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+      <div class="faq-q">What about holidays? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">We observe major federal holidays (Thanksgiving, Christmas, New Year's Day, and Independence Day). Holiday schedules are announced via email and posted notices at least one week in advance.</div>
+    </div>
+    <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+      <div class="faq-q">Can I opt out? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">The valet trash service is typically a property-wide amenity included in your lease. To opt out, contact your property management office — they handle all service modifications.</div>
+    </div>
+    <div class="faq-item reveal" onclick="this.classList.toggle('open')">
+      <div class="faq-q">I have bulk items to get rid of. What now? <span class="faq-toggle">+</span></div>
+      <div class="faq-a">We offer separate junk removal service for bulk items like furniture and appliances. Contact us at (214)-909-1824 or ask your property office to schedule a pickup.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="support-cta">
+  <div class="section-label reveal" style="justify-content:center;">Need Help?</div>
+  <h2 class="section-title reveal reveal-delay-1" style="text-align:center;">Three ways to <em>reach us</em></h2>
+  <p class="section-sub reveal reveal-delay-2" style="text-align:center;margin-left:auto;margin-right:auto;">Our support team responds within one business hour — Monday through Saturday.</p>
+
+  <div class="support-cards">
+    <div class="support-card reveal">
+      <div class="sc-icon">📞</div>
+      <h3>Call Us</h3>
+      <p>Speak directly with a local team member</p>
+      <a href="tel:2149091824">(214)-909-1824</a>
+    </div>
+    <div class="support-card reveal reveal-delay-1">
+      <div class="sc-icon">✉️</div>
+      <h3>Email Support</h3>
+      <p>Send us photos, details, or questions</p>
+      <a href="mailto:support@ecoclearsolutions.net">support@ecoclearsolutions.net</a>
+    </div>
+    <div class="support-card reveal reveal-delay-2">
+      <div class="sc-icon">🏢</div>
+      <h3>Your Leasing Office</h3>
+      <p>For bin replacements or schedule questions</p>
+      <a href="#">Contact your property office</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="index.html" class="footer-logo">EcoClear <span>Solutions LLC</span></a>
+      <p class="footer-desc">Dallas–Fort Worth's #1 rated valet trash and property services company.</p>
+      <div class="footer-contact">
+        <a href="tel:2149091824">(214)-909-1824</a>
+        <a href="mailto:support@ecoclearsolutions.net">support@ecoclearsolutions.net</a>
+        <span>2310 N Henderson Ave #1232, Dallas TX 75206</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html#valet-trash">Valet Trash</a></li>
+        <li><a href="services.html#pressure-washing">Pressure Washing</a></li>
+        <li><a href="services.html#carpet">Carpet Cleaning</a></li>
+        <li><a href="services.html#junk">Junk Removal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="property-managers.html">Property Managers</a></li>
+        <li><a href="residents.html">Residents</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>DFW Locations</h4>
+      <ul>
+        <li><a href="#">Dallas</a></li>
+        <li><a href="#">Fort Worth</a></li>
+        <li><a href="#">Plano</a></li>
+        <li><a href="#">Frisco</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <span>Copyright 2026 © EcoClear Solutions LLC</span>
+    <div><a href="#">Privacy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

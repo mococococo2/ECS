@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — EcoClear Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;0,900;1,300;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0D1B0F; --forest: #0E3B22; --green: #1A6B3C;
+    --lime: #C8F542; --lime-dark: #A8D830;
+    --cream: #F5F2EA; --white: #FAFAF8;
+    --muted: #4A6655; --border: rgba(14,59,34,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--ink); overflow-x: hidden; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: var(--forest); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 64px; border-bottom: 1px solid rgba(200,245,66,0.2); }
+  .nav-logo { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.25rem; color: var(--lime); text-decoration: none; letter-spacing: -0.02em; }
+  .nav-logo span { color: #fff; font-weight: 300; }
+  .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.875rem; font-weight: 400; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--lime); }
+  .nav-cta { background: var(--lime); color: var(--forest) !important; padding: 0.5rem 1.25rem; border-radius: 100px; font-weight: 600 !important; }
+
+  .section-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+  .section-label::before { content: ''; display: inline-block; width: 20px; height: 2px; background: var(--lime); border-radius: 1px; }
+  .section-title { font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 3.5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; color: var(--forest); margin-bottom: 1rem; }
+  .section-title em { font-style: italic; font-weight: 300; color: var(--green); }
+  .section-sub { font-size: 1rem; font-weight: 300; color: var(--muted); line-height: 1.7; max-width: 620px; margin-bottom: 3rem; }
+
+  /* HERO */
+  .contact-hero {
+    background: var(--forest);
+    padding: 5rem 4rem 6rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .contact-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 50% 40%, rgba(26,107,60,0.45) 0%, transparent 65%); pointer-events: none; }
+  .contact-hero > * { position: relative; z-index: 2; }
+  .breadcrumb { font-size: 0.8rem; color: rgba(200,245,66,0.7); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .breadcrumb a { color: rgba(200,245,66,0.5); text-decoration: none; }
+  .contact-hero h1 { font-family: 'Fraunces', serif; font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; color: #fff; max-width: 900px; margin: 0 auto 1.25rem; }
+  .contact-hero h1 em { font-style: italic; color: var(--lime); font-weight: 300; }
+  .contact-hero p { font-size: 1.1rem; color: rgba(255,255,255,0.65); font-weight: 300; line-height: 1.7; max-width: 580px; margin: 0 auto; }
+
+  /* CONTACT CHANNELS */
+  .channels {
+    padding: 5rem 4rem;
+    background: var(--white);
+  }
+  .channels-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .channel-card {
+    background: var(--cream); border-radius: 24px;
+    padding: 2.5rem; text-align: center;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .channel-card:hover {
+    transform: translateY(-6px);
+    background: var(--forest);
+    border-color: var(--forest);
+  }
+  .channel-card:hover .ch-title, .channel-card:hover .ch-desc { color: #fff; }
+  .channel-card:hover .ch-title { color: var(--lime); }
+  .channel-card:hover .ch-icon { background: var(--lime); color: var(--forest); }
+  .channel-card:hover .ch-link { color: var(--lime); }
+  .ch-icon {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--white); color: var(--forest);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; margin-bottom: 1.5rem;
+    transition: all 0.3s;
+  }
+  .ch-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem; font-weight: 500;
+    color: var(--forest); margin-bottom: 0.5rem;
+    transition: color 0.2s;
+  }
+  .ch-desc {
+    font-size: 0.875rem; color: var(--muted);
+    font-weight: 300; line-height: 1.6;
+    margin-bottom: 1.25rem;
+    transition: color 0.2s;
+  }
+  .ch-link {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--forest); text-decoration: none;
+    transition: color 0.2s;
+    margin-top: auto;
+  }
+
+  /* QUOTE FORM */
+  .quote-section {
+    padding: 6rem 4rem;
+    background: var(--forest);
+    display: grid; grid-template-columns: 1fr 1.1fr;
+    gap: 5rem; align-items: start;
+    position: relative; overflow: hidden;
+  }
+  .quote-section::before { content: ''; position: absolute; top: -30%; right: -15%; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(200,245,66,0.08) 0%, transparent 65%); }
+  .quote-section > * { position: relative; z-index: 1; }
+  .quote-section .section-label { color: var(--lime); }
+  .quote-section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 700; line-height: 1.15;
+    letter-spacing: -0.03em; color: #fff;
+    margin-bottom: 1rem;
+  }
+  .quote-section h2 em { font-style: italic; color: var(--lime); font-weight: 300; }
+  .quote-desc { font-size: 1rem; color: rgba(255,255,255,0.65); font-weight: 300; line-height: 1.7; margin-bottom: 2rem; }
+  .quote-highlights { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 2rem; }
+  .qh-item { display: flex; align-items: center; gap: 0.85rem; font-size: 0.925rem; color: rgba(255,255,255,0.75); font-weight: 300; }
+  .qh-check {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--lime); color: var(--forest);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 11px; font-weight: 700;
+  }
+
+  .quote-form { background: var(--white); border-radius: 24px; padding: 2.5rem; }
+  .form-title { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; color: var(--forest); margin-bottom: 0.25rem; }
+  .form-sub { font-size: 0.825rem; color: var(--muted); font-weight: 300; margin-bottom: 1.75rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+  .form-group label { font-size: 0.8rem; font-weight: 500; color: var(--forest); }
+  .form-group input, .form-group select, .form-group textarea {
+    border: 1px solid var(--border); border-radius: 10px; padding: 0.7rem 1rem;
+    font-family: 'Outfit', sans-serif; font-size: 0.875rem; color: var(--ink);
+    background: var(--white); transition: border-color 0.2s; outline: none;
+    font-weight: 400;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--green); }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-submit {
+    width: 100%; padding: 0.95rem; background: var(--forest); color: #fff;
+    border: none; border-radius: 100px;
+    font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; margin-top: 0.5rem;
+    transition: all 0.2s;
+  }
+  .form-submit:hover { background: var(--green); transform: translateY(-1px); }
+  .form-note { text-align: center; font-size: 0.75rem; color: var(--muted); margin-top: 0.75rem; }
+
+  /* LOCATION / HOURS */
+  .location-info {
+    padding: 6rem 4rem;
+    background: var(--cream);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+  .info-card {
+    background: var(--white); border-radius: 24px; padding: 2.5rem;
+    border: 1px solid var(--border);
+  }
+  .info-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem; font-weight: 600;
+    color: var(--forest); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .info-emoji { font-size: 1.5rem; }
+  .info-row { display: flex; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-size: 0.925rem; }
+  .info-row:last-child { border-bottom: none; }
+  .info-label { color: var(--muted); font-weight: 400; }
+  .info-value { color: var(--forest); font-weight: 500; font-family: 'Fraunces', serif; }
+  .info-value.closed { color: #b03030; font-style: italic; font-weight: 400; }
+  .info-card > p { font-size: 0.925rem; color: var(--muted); font-weight: 300; line-height: 1.7; margin-bottom: 1rem; }
+  .info-card > p strong { color: var(--forest); font-weight: 500; }
+  .map-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--green); text-decoration: none; font-weight: 500;
+    font-size: 0.9rem; margin-top: 0.5rem;
+    transition: color 0.2s;
+  }
+  .map-link:hover { color: var(--lime-dark); }
+
+  /* SOCIAL */
+  .social-strip {
+    padding: 3rem 4rem;
+    background: var(--ink);
+    text-align: center;
+  }
+  .social-strip h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; color: #fff; margin-bottom: 1.5rem; font-weight: 500; }
+  .social-strip h3 em { color: var(--lime); font-style: italic; font-weight: 300; }
+  .social-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .social-btn {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.85); text-decoration: none;
+    padding: 0.75rem 1.5rem; border-radius: 100px;
+    font-size: 0.875rem; font-weight: 400;
+    transition: all 0.2s;
+  }
+  .social-btn:hover { background: rgba(200,245,66,0.1); border-color: rgba(200,245,66,0.3); color: var(--lime); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer { background: var(--ink); padding: 4rem 4rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-logo { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700; color: var(--lime); margin-bottom: 0.75rem; display: block; text-decoration: none; }
+  .footer-logo span { color: rgba(255,255,255,0.5); font-weight: 300; }
+  .footer-desc { font-size: 0.825rem; color: rgba(255,255,255,0.4); font-weight: 300; line-height: 1.7; margin-bottom: 1.25rem; }
+  .footer-contact { display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.8rem; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .footer-contact a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-col h4 { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.3); margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul a { font-size: 0.825rem; color: rgba(255,255,255,0.5); text-decoration: none; font-weight: 300; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--lime); }
+  .footer-bar { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; color: rgba(255,255,255,0.25); font-weight: 300; }
+  .footer-bar a { color: rgba(255,255,255,0.25); text-decoration: none; margin-left: 1.5rem; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+
+  @media (max-width: 900px) {
+    .channels-grid { grid-template-columns: 1fr; }
+    .quote-section, .location-info { grid-template-columns: 1fr; }
+    .nav-links { gap: 1rem; font-size: 0.8rem; }
+    .contact-hero, .channels, .quote-section, .location-info, .social-strip, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">EcoClear <span>Solutions</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="property-managers.html">Property Managers</a></li>
+    <li><a href="residents.html">Residents</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="tel:2149091824" class="nav-cta">📞 (214)-909-1824</a></li>
+  </ul>
+</nav>
+
+<section class="contact-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;›&nbsp; Contact</div>
+  <h1>Let's <em>talk</em></h1>
+  <p>Whether you're pricing a new contract, switching from a national provider, or just have a question — we respond to every message within one business hour.</p>
+</section>
+
+<!-- CHANNELS -->
+<section class="channels">
+  <div class="channels-grid">
+    <a href="tel:2149091824" class="channel-card reveal" style="text-decoration:none;">
+      <div class="ch-icon">📞</div>
+      <div class="ch-title">Call Us</div>
+      <div class="ch-desc">Speak directly with our team — 9 AM to 6 PM, Monday through Saturday.</div>
+      <div class="ch-link">(214)-909-1824</div>
+    </a>
+    <a href="mailto:support@ecoclearsolutions.net" class="channel-card reveal reveal-delay-1" style="text-decoration:none;">
+      <div class="ch-icon">✉️</div>
+      <div class="ch-title">Email Us</div>
+      <div class="ch-desc">Send questions, photos, or details — we respond within one hour.</div>
+      <div class="ch-link">support@ecoclearsolutions.net</div>
+    </a>
+    <a href="sms:2149091824" class="channel-card reveal reveal-delay-2" style="text-decoration:none;">
+      <div class="ch-icon">💬</div>
+      <div class="ch-title">Text Us</div>
+      <div class="ch-desc">Prefer texting? Send us a message — we reply in minutes, not hours.</div>
+      <div class="ch-link">Text (214)-909-1824</div>
+    </a>
+  </div>
+</section>
+
+<!-- QUOTE FORM -->
+<section class="quote-section" id="quote">
+  <div>
+    <div class="section-label reveal">Get Pricing</div>
+    <h2 class="reveal reveal-delay-1">Request your <em>free quote</em></h2>
+    <p class="quote-desc reveal reveal-delay-2">Same-day pricing with no pressure and no long-term contract required. Custom plans for apartments, condos, HOAs, and multifamily communities across DFW.</p>
+    <div class="quote-highlights reveal reveal-delay-2">
+      <div class="qh-item"><div class="qh-check">✓</div>$9–10/unit promo rate for 250+ unit properties</div>
+      <div class="qh-item"><div class="qh-check">✓</div>Same-day service activation available</div>
+      <div class="qh-item"><div class="qh-check">✓</div>Includes leak-proof bins and resident welcome kit</div>
+      <div class="qh-item"><div class="qh-check">✓</div>GPS-verified pickups with photo proof</div>
+      <div class="qh-item"><div class="qh-check">✓</div>Switch from your current provider in 7 days</div>
+      <div class="qh-item"><div class="qh-check">✓</div>No long-term contract required to start</div>
+    </div>
+  </div>
+  <div class="reveal reveal-delay-2">
+    <div class="quote-form">
+      <div class="form-title">Get my quote</div>
+      <div class="form-sub">We'll respond within one business hour.</div>
+      <div class="form-row">
+        <div class="form-group"><label>Your Name</label><input type="text" placeholder="Jane Smith"></div>
+        <div class="form-group"><label>Phone</label><input type="tel" placeholder="(214) 555-0100"></div>
+      </div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="jane@property.com"></div>
+      <div class="form-group"><label>Property Name</label><input type="text" placeholder="The Reserve at Mockingbird"></div>
+      <div class="form-row">
+        <div class="form-group"><label>City</label><input type="text" placeholder="Dallas"></div>
+        <div class="form-group"><label>Number of Units</label><input type="number" placeholder="250"></div>
+      </div>
+      <div class="form-group"><label>Services Interested In</label>
+        <select>
+          <option>Valet Trash Service</option>
+          <option>Pressure Washing</option>
+          <option>Commercial Janitorial</option>
+          <option>Dog Park Sanitation</option>
+          <option>Carpet Cleaning</option>
+          <option>Apartment Make-Ready</option>
+          <option>Junk Removal</option>
+          <option>Post-Construction Cleaning</option>
+          <option>Multiple services</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Additional Details <span style="font-weight:300;color:var(--muted);">(optional)</span></label><textarea placeholder="Current provider, timeline, specific concerns..."></textarea></div>
+      <button class="form-submit" onclick="alert('Thanks! Our team will be in touch within one hour.')">Get My Free Quote →</button>
+      <div class="form-note">🔒 Your information is secure and never shared.</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION / HOURS -->
+<section class="location-info">
+  <div class="info-card reveal">
+    <div class="info-title"><span class="info-emoji">📍</span> Our Office</div>
+    <p><strong>EcoClear Solutions LLC</strong></p>
+    <p>2310 North Henderson Ave #1232<br>Dallas, TX 75206</p>
+    <a href="https://maps.google.com/?q=2310+N+Henderson+Ave+Dallas+TX" target="_blank" class="map-link">Open in Google Maps →</a>
+    <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+      <p style="font-size:0.825rem;margin:0;"><strong>Service Area:</strong> Entire Dallas–Fort Worth metroplex — including Dallas, Fort Worth, Plano, Frisco, Irving, Garland, Arlington, Carrollton, Richardson, Mesquite, Grand Prairie, and 20+ more DFW cities.</p>
+    </div>
+  </div>
+  <div class="info-card reveal reveal-delay-1">
+    <div class="info-title"><span class="info-emoji">🕐</span> Office Hours</div>
+    <div class="info-row"><span class="info-label">Monday</span><span class="info-value">9 AM – 6 PM</span></div>
+    <div class="info-row"><span class="info-label">Tuesday</span><span class="info-value">9 AM – 6 PM</span></div>
+    <div class="info-row"><span class="info-label">Wednesday</span><span class="info-value">9 AM – 6 PM</span></div>
+    <div class="info-row"><span class="info-label">Thursday</span><span class="info-value">9 AM – 6 PM</span></div>
+    <div class="info-row"><span class="info-label">Friday</span><span class="info-value">9 AM – 6 PM</span></div>
+    <div class="info-row"><span class="info-label">Saturday</span><span class="info-value">10 AM – 4 PM</span></div>
+    <div class="info-row"><span class="info-label">Sunday</span><span class="info-value closed">Closed</span></div>
+    <div style="margin-top:1.25rem;padding:1rem 1.25rem;background:var(--cream);border-radius:12px;font-size:0.825rem;color:var(--muted);font-weight:300;line-height:1.6;">
+      <strong style="color:var(--forest);font-weight:500;">Service hours:</strong> Valet trash crews operate 5–8 PM, Sunday through Thursday. Emergency service available 24/7 for contracted properties.
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="social-strip">
+  <h3>Follow us on <em>social</em></h3>
+  <div class="social-links">
+    <a href="https://www.facebook.com/profile.php?id=61566799242616" target="_blank" class="social-btn">📘 Facebook</a>
+    <a href="https://www.instagram.com/ecoclearsolutions" target="_blank" class="social-btn">📷 Instagram</a>
+    <a href="https://x.com/EcoClearLLC" target="_blank" class="social-btn">𝕏 Twitter</a>
+    <a href="https://youtube.com/@ecoclearsolutions" target="_blank" class="social-btn">▶️ YouTube</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="index.html" class="footer-logo">EcoClear <span>Solutions LLC</span></a>
+      <p class="footer-desc">Dallas–Fort Worth's #1 rated valet trash and property services company.</p>
+      <div class="footer-contact">
+        <a href="tel:2149091824">(214)-909-1824</a>
+        <a href="mailto:support@ecoclearsolutions.net">support@ecoclearsolutions.net</a>
+        <span>2310 N Henderson Ave #1232, Dallas TX 75206</span>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul>
+      <li><a href="services.html#valet-trash">Valet Trash</a></li>
+      <li><a href="services.html#pressure-washing">Pressure Washing</a></li>
+      <li><a href="services.html#carpet">Carpet Cleaning</a></li>
+      <li><a href="services.html#junk">Junk Removal</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Company</h4><ul>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="property-managers.html">Property Managers</a></li>
+      <li><a href="residents.html">Residents</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>DFW Locations</h4><ul>
+      <li><a href="#">Dallas</a></li>
+      <li><a href="#">Fort Worth</a></li>
+      <li><a href="#">Plano</a></li>
+      <li><a href="#">Frisco</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bar">
+    <span>Copyright 2026 © EcoClear Solutions LLC</span>
+    <div><a href="#">Privacy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
